@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spider.mapper.SpiderDataMapper">
+  <resultMap id="BaseResultMap" type="spider.model.spiderData">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="biz_type" jdbcType="INTEGER" property="bizType" />
+    <result column="data_type" jdbcType="INTEGER" property="dataType" />
+    <result column="data_id" jdbcType="BIGINT" property="dataId" />
+    <result column="data_contribution_id" jdbcType="BIGINT" property="dataContributionId" />
+    <result column="code" jdbcType="BIGINT" property="code" />
+    <result column="table_name" jdbcType="VARCHAR" property="tableName" />
+    <result column="odps_url" jdbcType="VARCHAR" property="odpsUrl" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="err" jdbcType="VARCHAR" property="err" />
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+    <result column="website" jdbcType="LONGVARCHAR" property="website" />
+    <result column="url" jdbcType="LONGVARCHAR" property="url" />
+  </resultMap>
+
+  <insert id="saveData" parameterType="java.util.HashMap">
+  INSERT INTO spider_data(name,description,
+  website,url,biz_type,data_type,
+  data_id,data_contribution_id,code,table_name,odps_url,
+  state)
+  VALUES
+  (#{name},#{description},#{website},#{url},
+  #{bizType},#{dataType},
+  #{dataId},#{dataContributionId},#{code},
+  #{tableName},#{odpsUrl},1);
+</insert>
+  <update id="saveErr" parameterType="java.util.HashMap">
+  INSERT INTO spider_data(name,description,
+  website,url,biz_type,data_type,
+  data_contribution_id,code,table_name,odps_url,
+  state,err)
+  VALUES
+  (#{name},#{description},#{website},#{url},
+  #{bizType},#{data_type},
+  #{dataContributionId},#{code},
+  #{tableName},#{odpsUrl},0,#{err});
+</update>
+
+</mapper>
